@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension
+	type="module"
+	version="2.5"
+	client="site"
+	method="upgrade">
+	<name>EXT Callback</name>
+	<author>Ext-Joom.com</author>
+	<creationDate>22/11/2013</creationDate>
+	<copyright>Copyright (C) 2011-2014 Ext-Joom.com. All Rights Reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>extjoom@gmail.com</authorEmail>
+	<authoralt>http://www.Ext-Joom.com</authoralt>
+	<version>1.2</version>
+	<description>The module displays a call back </description>
+	<files>	
+		<filename module="mod_ext_callback">mod_ext_callback.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_ext_callback.php</filename>
+		<filename>mod_ext_callback.xml</filename>
+		<folder>assets</folder>
+		<folder>tmpl</folder>	    
+    </files>
+	
+	<languages>	
+		<language tag="en-GB">en-GB.mod_ext_callback.ini</language>
+		<language tag="en-GB">en-GB.mod_ext_callback.sys.ini</language>
+		<language tag="ru-RU">ru-RU.mod_ext_callback.ini</language>
+		<language tag="ru-RU">ru-RU.mod_ext_callback.sys.ini</language>	
+	</languages>
+		
+	<config>
+		<fields name="params">
+			<fieldset name="basic">	
+				
+				<field 
+					name="ext_id" 
+					type="text" 
+					default="1" 
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_EXT_ID_LABEL" 
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_EXT_ID_DESC"/>
+				
+				<field
+					name="ext_my_email"
+					type="textarea"
+					filter="raw"
+					default="your@email.com"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_MY_EMAIL_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_MY_EMAIL_DESC" />				
+
+				
+				<field
+					name="ext_subject"
+					type="textarea"
+					filter="raw"
+					default="Callback from your site"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_FIELD_SUBJECT_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_NAME_LABEL_DESC" />
+				
+				
+				
+				<field
+					name="ext_send_label"
+					type="text"
+					default="Send"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_FIELD_SEND_LABEL_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_NAME_LABEL_DESC" />
+					
+				
+				<field type="spacer" label="REQUIRED_FIELDS_SPACER" />
+				
+				<field
+					name="ext_name_label"
+					type="text"
+					default="Name:"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_FIELD_NAME_LABEL_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_NAME_LABEL_DESC" />
+				
+				<field
+					name="ext_attribute_name"
+					type="text"
+					default="Your Name"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_EXT_ATTRIBUTE_PLACEHOLDER_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_EXT_ATTRIBUTE_PLACEHOLDER_DESC" />
+				
+				
+				<field
+					name="ext_phone_label"
+					type="text"
+					default="Phone:"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_FIELD_PHONE_LABEL_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_NAME_LABEL_DESC" />				
+			
+				<field
+					name="ext_attribute_phone"
+					type="text"
+					default="147258369"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_EXT_ATTRIBUTE_PLACEHOLDER_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_EXT_ATTRIBUTE_PLACEHOLDER_DESC" />
+				
+				
+				<field
+					name="ext_message_label"
+					type="text"
+					default="Message:"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_FIELD_MESSAGE_LABEL_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_NAME_LABEL_DESC" />
+				
+				<field
+					name="ext_attribute_message"
+					type="text"
+					default="Note..."
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_EXT_ATTRIBUTE_PLACEHOLDER_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_EXT_ATTRIBUTE_PLACEHOLDER_DESC" />	
+				
+				<field 
+					name="ext_show_message" 
+					type="radio"
+					class="btn-group"
+					default="1"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_FIELD_SHOW_MESSAGE_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_SHOW_MESSAGE_DESC"
+					filter="int">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+					
+				
+				<field type="spacer" label="MESSAGES_SPACER" />	
+				
+				<field
+					name="ext_send_message"
+					type="textarea"
+					filter="raw"
+					rows="2" 
+					cols="40"
+					default="Thank you, call you soon!"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_SEND_MESSAGE_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_SEND_MESSAGE_DESC" />
+				
+				
+				<field
+					name="ext_error_field"
+					type="textarea"
+					filter="raw"
+					rows="2" 
+					cols="40"
+					default="Please fill in all fields!"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_ERROR_FIELD_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_ERROR_FIELD_DESC" />				
+				
+				<field
+					name="ext_error_phone_field"
+					type="textarea"
+					filter="raw"
+					rows="2" 
+					cols="40"
+					default="The phone must be in the format 123456789"
+					label="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_ERROR_PHONE_FIELD_LABEL"
+					description="MOD_EXT_QUICK_CONTACT_FORM_JQUERY_FIELD_ERROR_PHONE_FIELD_DESC" />	
+				
+			</fieldset>
+			
+			<fieldset
+				name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+					
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+				<field
+					name="cache"
+					type="list"
+					default="0"
+					class="btn-group"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static">
+					<option
+						value="static"></option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
