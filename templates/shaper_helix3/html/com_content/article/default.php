@@ -32,9 +32,17 @@ $useDefList = ($params->get('show_modify_date') || $params->get('show_publish_da
 ?>
 <article class="item item-page<?php echo $this->pageclass_sfx ?> <?php ($this->item->featured) ? ' item-featured' : ''; ?>" itemscope itemtype="http://schema.org/Article">
 	<meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? JFactory::getConfig()->get('language') : $this->item->language; ?>" />
-	<?php if ($this->params->get('show_page_heading', 1)) : ?>
+	<?php if ($this->params->get('show_page_heading', 1) || $params->get('show_title')) : ?>
 	<div class="page-header">
-		<h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
+		<h1>
+			<?php
+			if ($params->get('show_title')) {
+				echo $this->escape($this->item->title);
+			} elseif ($this->params->get('show_page_heading', 1)) {
+				echo $this->escape($this->params->get('page_heading'));
+			}
+			?>
+		</h1>
 	</div>
 	<?php endif;
 
