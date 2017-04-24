@@ -13,7 +13,7 @@ JHtml::_('bootstrap.tooltip');
 
 ?>
 
-<ol class="breadcrumb<?php echo $moduleclass_sfx; ?>">
+<ol class="breadcrumb<?php echo $moduleclass_sfx; ?>" itemscope itemtype="http://schema.org/BreadcrumbList">
 	<?php
 	if ($params->get('showHere', 1))
 	{
@@ -21,7 +21,7 @@ JHtml::_('bootstrap.tooltip');
 	}
 	else
 	{
-		echo '<li><i class="fa fa-home"></i></li>';
+		echo '<li itemscope itemtype="http://schema.org/ListItem"><i itemprop="item" class="fa fa-home"></i></li>';
 	}
 
 	// Get rid of duplicated entries on trail including home page when using multilanguage
@@ -42,15 +42,15 @@ JHtml::_('bootstrap.tooltip');
 
 	foreach ($list as $key => $item) {
 		if ($key != $last_item_key) {
-			echo '<li>';
+			echo '<li itemscope itemtype="http://schema.org/ListItem">';
 			if (!empty($item->link)) {
-				echo '<a href="' . $item->link . '" class="pathway">' . $item->name . '</a>';
+				echo '<a href="' . $item->link . '" class="pathway" itemprop="item">' . $item->name . '</a>';
 			} else {
 				echo $item->name;
 			}
 			echo '</li>';
 		} elseif ($show_last) {
-			echo '<li class="active">' . $item->name . '</li>';
+			echo '<li class="active" itemprop="item">' . $item->name . '</li>';
 		}
 	}
 	?>
