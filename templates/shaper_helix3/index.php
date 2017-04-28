@@ -31,10 +31,6 @@ if($this->helix3->getParam('comingsoon_mode')) header("Location: ".$this->baseUr
 //Class Classes
 $body_classes = '';
 
-if($this->helix3->getParam('sticky_header')) {
-    $body_classes .= ' sticky-header';
-}
-
 $body_classes .= ($this->helix3->getParam('boxed_layout', 0)) ? ' layout-boxed' : ' layout-fluid';
 
 //Body Background Image
@@ -45,11 +41,11 @@ if($bg_image = $this->helix3->getParam('body_bg_image')) {
     $body_style .= 'background-size: '. $this->helix3->getParam('body_bg_size') .';';
     $body_style .= 'background-attachment: '. $this->helix3->getParam('body_bg_attachment') .';';
     $body_style .= 'background-position: '. $this->helix3->getParam('body_bg_position') .';';
-    $body_style  = 'body.site {' . $body_style . '}'; 
+    $body_style  = 'body.site {' . $body_style . '}';
 
     $doc->addStyledeclaration( $body_style );
 }
-
+/*
 //Body Font
 $webfonts = array();
 
@@ -98,7 +94,7 @@ if( $this->params->get('enable_custom_font') && $this->params->get('custom_font_
 }
 
 $this->helix3->addGoogleFont($webfonts);
-
+*/
 //Custom CSS
 if($custom_css = $this->helix3->getParam('custom_css')) {
     $doc->addStyledeclaration( $custom_css );
@@ -124,63 +120,17 @@ if($custom_js = $this->helix3->getParam('custom_js')) {
     }
     ?>
 
-    <?php
-
-    $this->helix3->addCSS('bootstrap.min.css, font-awesome.min.css') // CSS Files
-    ->addJS('bootstrap.min.js, jquery.sticky.js, custom.js, main.js, share42/share42.js') // JS Files
-    ->lessInit()->setLessVariables(array(
-        'preset'=>$this->helix3->Preset(),
-        'bg_color'=> $this->helix3->PresetParam('_bg'),
-        'text_color'=> $this->helix3->PresetParam('_text'),
-        'major_color'=> $this->helix3->PresetParam('_major')
-    ))
-    ->addLess('legacy/bootstrap', 'legacy')
-    ->addLess('master', 'template');
-
-    //RTL
-    if($this->direction=='rtl') {
-        $this->helix3->addCSS('bootstrap-rtl.min.css')
-        ->addLess('rtl', 'rtl');
-    }
-
-    $this->helix3->addLess('presets',  'presets/'.$this->helix3->Preset(), array('class'=>'preset'));
-
-    //Before Head
-    if($before_head = $this->helix3->getParam('before_head')) {
-        echo $before_head . "\n";
-    }
-    ?>
-
-
-    <?php
-
-    if($this->params->get('compress_css')) {
-        $this->helix3->compressCSS();
-    }
-
-    if($this->params->get('compress_js')) {
-        $this->helix3->compressJS( $this->params->get('exclude_js') );
-    }
-
-    if($before_body = $this->helix3->getParam('before_body')) {
-        echo $before_body . "\n";
-    }
-
-    ?>
-
     <jdoc:include type="head" />
-
 </head>
-<body class="<?php echo $this->helix3->bodyClass( $body_classes ); ?>">
+<?php
+$app = JFactory::getApplication();
+$menu = $app->getMenu()->getActive();
+$pageclass = '';
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+if (is_object($menu))
+    $pageclass = $menu->params->get('pageclass_sfx');
+?>
+<body class="<?php echo $this->helix3->bodyClass( $body_classes . $pageclass ); ?>">
 
     <div class="body-innerwrapper">
         <?php $this->helix3->generatelayout(); ?>
@@ -197,17 +147,47 @@ if($custom_js = $this->helix3->getParam('custom_js')) {
         </div>
     </div>
 
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,800,600,regular&subset=latin" type="text/css" />
+    <link rel="stylesheet" href="<?php echo $this->helix3->getTemplateUri(); ?>/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo $this->helix3->getTemplateUri(); ?>/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo $this->helix3->getTemplateUri(); ?>/css/legacy.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo $this->helix3->getTemplateUri(); ?>/css/template.css" type="text/css" />
+    <link rel="stylesheet" href="<?php echo $this->helix3->getTemplateUri(); ?>/css/presets/preset1.css" type="text/css" class="preset" />
+    <link rel="stylesheet" href="http://remontvolt.com/modules/mod_ext_callback/assets/css/default.css" type="text/css" />
+    <style type="text/css">
+        body{font-family:Open Sans, sans-serif; font-weight:300; }
+        h1{font-family:Open Sans, sans-serif; font-weight:800; }
+        h2{font-family:Open Sans, sans-serif; font-weight:600; }
+        h3{font-family:Open Sans, sans-serif; font-weight:normal; }
+        h4{font-family:Open Sans, sans-serif; font-weight:normal; }
+        h5{font-family:Open Sans, sans-serif; font-weight:600; }
+        h6{font-family:Open Sans, sans-serif; font-weight:600; }
+        #sp-top-bar{ background-color:#f5f5f5;color:#999999; }
+    </style>
+    <script src="<?php echo $this->helix3->getTemplateUri(); ?>/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo $this->helix3->getTemplateUri(); ?>/js/custom.js" type="text/javascript"></script>
+    <script src="<?php echo $this->helix3->getTemplateUri(); ?>/js/main.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(window).on('load',  function() {
+            new JCaption('img.caption');
+        });
+    </script>
+
     <jdoc:include type="modules" name="debug" />
-<script>
-    //****** GoogleAnalytics
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-76952802-1', 'auto');
-    ga('send', 'pageview');
+    <?php if (!isset($_SERVER['HTTP_USER_AGENT']) || stripos($_SERVER['HTTP_USER_AGENT'], 'Speed Insights') === false): ?>
+        <script type="text/javascript">
+            //****** GoogleAnalytics
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-</script>
+            ga('create', 'UA-76952802-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+    <?php endif; ?>
+
 </body>
 </html>
